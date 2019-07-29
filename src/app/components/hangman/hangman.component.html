@@ -1,0 +1,6 @@
+<div class="hangman">
+  <app-hangman-status [hangmanStatus]="hangmanStatus"></app-hangman-status>
+  <div>{{progress}}</div>
+  <div>{{answer}}</div>
+  <app-game-state [gameState]="gameState" (againClicked)="startNewGame()"></app-game-state>
+</div>

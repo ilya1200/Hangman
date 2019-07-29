@@ -1,0 +1,8 @@
+<div class="game-state layout">
+  <img class="game-state-icon" [src]="gameStateIcon">
+  <div class="game-state-message lose">
+    <!-- [ngClass] should append .win/.lose -->
+    {{gameStateMessage}}
+  </div>
+  <button *ngIf="!isPlaying" class="game-state-button" (click)="onClick">AGAIN</button>
+</div>

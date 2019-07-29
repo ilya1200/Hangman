@@ -1,0 +1,40 @@
+.game-state{
+    width: 150px;
+    height: 410px;
+}
+
+.layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.game-state-icon{
+    
+}
+.win{
+    color: lightgreen;
+}
+
+.lose{
+    color: tomato;
+}
+
+
+.game-state-message,
+.game-state-button{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+.game-state-button{
+    background-color: #2271BF;
+    color: white;
+    height: 75px;
+    border: 0;
+    border-radius: 16px;
+    margin-top: 22px;
+}
