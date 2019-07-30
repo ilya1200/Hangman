@@ -1,0 +1,19 @@
+.keyboard-letter{
+    border: 0;
+    border-radius: 50%;
+    background-color: lightgray;
+    color: black;
+    margin-right: 9px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    width: 46px;
+    height: 46px;
+    text-align: center;
+    font-size: 30px;
+}
+
+
+.keyboard-letter[disabled]{
+    cursor: not-allowed;
+    color: gray;
+}

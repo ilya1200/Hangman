@@ -4,5 +4,5 @@
     <!-- [ngClass] should append .win/.lose -->
     {{gameStateMessage}}
   </div>
-  <button *ngIf="!isPlaying" class="game-state-button" (click)="onClick">AGAIN</button>
+  <button *ngIf="!isPlaying" class="game-state-button" (click)="onClick()">AGAIN</button>
 </div>

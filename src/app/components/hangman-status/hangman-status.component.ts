@@ -30,11 +30,8 @@ export class HangmanStatusComponent implements OnChanges {
   updateHangmanImg(hangmanStatus: number): void {
     if (!hangmanStatus || hangmanStatus < 0 || hangmanStatus > this.hangmanImages.length - 1) {
       this.hangmanStatus = 0;
-      return;
     }
     this.imgIndex = hangmanStatus;
     this.hangmanImg = this.hangmanImages[this.imgIndex];
-    console.log(this.imgIndex);
-    console.log(this.hangmanImg);
   }
 }

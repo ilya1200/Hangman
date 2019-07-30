@@ -1,0 +1,13 @@
+.board{
+    display: flex;
+    flex-direction: column;
+}
+ .flex {
+     display: flex;
+     flex-wrap: wrap;
+ }
+
+ .dletter {
+     margin: 10px;
+     min-width: 30px;
+ }

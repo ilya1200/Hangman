@@ -7,54 +7,70 @@ import { strictEqual } from 'assert';
 })
 export class GameService {
   public readonly MAX_MISSES: number = 7;
-  private answer: string;
-  private hits: string;
-  private misses: string;
+  private answer: string[];
+  private hits: string[];
+  private misses: string[];
 
   constructor() { }
 
-  public createGame(movies: IMovie[]): string {
-    this.answer = this.selectMovie(movies).split("\\s{2,}").join(' ');
-    this.hits = "";
-    this.misses = "";
+  public createGame(movies: IMovie[]): string[] {
+    this.answer = this.selectMovie(movies).split("\\s{2,}").join(' ').split("");
+    this.hits = [];
+    this.misses = [];
+
+    this.preFill();
 
     return this.getCurrentProgress();
   }
 
-  public getAnswer(): string {
-    return this.answer;
+  public getHits():string[]{
+    return this.hits;
   }
 
-  public applyGuess(letters: string): boolean {
-    try {
-      const guess = this.normalizeGuess(letters);
-      const isHit = this.isHit(guess);
+  public getMisses():string[]{
+    return this.misses;
+  }
 
-      if (isHit) {
-        this.hits += guess;
-      } else {
-        this.misses += guess;
-      }
-      return isHit;
+  public getAnswer(): string {
+    return this.answer.join('');
+  }
 
-    } catch (error) {
-      throw error;
+  public preFill() {
+    while (this.hits.length < this.answer.length * 0.25) {
+      let letter: string = this.getRandomLetter();
+      this.applyGuess(letter);
     }
   }
 
-  public getCurrentProgress(): string {
+  private getRandomLetter(): string {
+    return this.answer[this.generateRandomNumber(0, this.answer.length - 1)];
+  }
+
+  public applyGuess(guess: string): boolean {
+
+    const isHit = this.isHit(guess);
+
+    if (isHit) {
+      this.hits.push(guess);
+    } else {
+      this.misses.push(guess);
+    }
+    return isHit;
+  }
+
+  public getCurrentProgress(): string[] {
     const answer = this.answer;
-    let progress: string = "";
+    let progress: string[] = [];
 
     for (let i = 0; i < answer.length; i++) {
-      let char: string = answer.charAt(i);
+      let char: string = answer[i];
       let display: string;
 
       display = '-';
       if (this.hits.indexOf(char) > -1 || char === ' ') {
         display = char;
       }
-      progress += display;
+      progress.push(display);
     }
     return progress;
   }
@@ -67,29 +83,20 @@ export class GameService {
   }
 
   public isAlreadyBeenGuessed(letter: string): boolean {
-    return (this.hits.indexOf(letter) > -1) || (this.misses.indexOf(letter) > -1);
+    if (this.hits && this.misses) {
+      return (this.hits.indexOf(letter) > -1) || (this.misses.indexOf(letter) > -1);
+    } else {
+      return false;
+    }
   }
 
   public isWon(): boolean {
-    return this.getCurrentProgress().indexOf('-') > -1;
-  }
-
-
-  private normalizeGuess(letters: string): string {
-    if (letters.length === 0) {
-      throw "No letter found";
-    }
-
-    const letter: string = letters.charAt(0);
-    if (this.isAlreadyBeenGuessed(letter)) {
-      throw `The letter ${letter} has already been guessed`;
-    }
-    return letter;
+    return !(this.getCurrentProgress().indexOf('-') > -1);
   }
 
   private selectMovie(movies: IMovie[]): string {
     const randomMovie = this.generateRandomNumber(0, movies.length - 1);
-    return movies[randomMovie].title.toLowerCase();
+    return movies[randomMovie].title.toUpperCase();
   }
 
   private generateRandomNumber(lower: number, upper: number): number {

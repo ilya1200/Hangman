@@ -1,6 +1,9 @@
 <div class="hangman">
   <app-hangman-status [hangmanStatus]="hangmanStatus"></app-hangman-status>
-  <div>{{progress}}</div>
-  <div>{{answer}}</div>
+  <app-board [progress]="progress" (onKeyPress)="onGuessInput($event)" class="app-board"></app-board>
   <app-game-state [gameState]="gameState" (againClicked)="startNewGame()"></app-game-state>
 </div>
+
+<swal #answerAlert title="The answer is..." text="{{answer}}" type="error" [showCancelButton]="false"
+  [focusCancel]="true">
+</swal>
