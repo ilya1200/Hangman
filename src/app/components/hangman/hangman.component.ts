@@ -26,16 +26,16 @@ export class HangmanComponent implements OnInit {
   createGame(): void {
     this.http.getMovies().subscribe(
       movies => {
-        this.progress = this.game.createGame(movies);
         this.hangmanStatus = 0;
         this.gameState = GameState.playing;
-        this.answer = this.game.getAnswer();//For Testing
+        this.progress = this.game.createGame(movies);
+        this.answer = this.game.getAnswer();
       },
       error => this.errorMessage(error)
     )
   }
 
-  onGuessInput(guessInputLetter: string): void { // Keypress should use it
+  onGuessInput(guessInputLetter: string): void {
     if (this.gameState === GameState.playing) {
       this.applyGuess(guessInputLetter);
     }
@@ -46,7 +46,7 @@ export class HangmanComponent implements OnInit {
     this.progress = this.game.getCurrentProgress();
 
     if (!this.isHit) {
-      this.hangmanStatus += 1; //derived from remainig tries
+      this.hangmanStatus += 1;
     }
 
     this.determineGameOutcome();
@@ -55,11 +55,9 @@ export class HangmanComponent implements OnInit {
   determineGameOutcome(): void {
     if (this.game.isWon()) {
       this.gameState = GameState.win;
-    } else if (this.game.getRemainingTries() === 0) { // isLose
+    } else if (this.game.isLose()) {
       this.gameState = GameState.lose;
-      this.hangmanStatus = 6;
-      this.answerAlert.show()
-      // revealTheAnswer(this.answer);
+      this.answerAlert.show();
     } else {
       this.gameState = GameState.playing;
     }

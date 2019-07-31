@@ -6,10 +6,10 @@ import { strictEqual } from 'assert';
   providedIn: 'root'
 })
 export class GameService {
-  public readonly MAX_MISSES: number = 7;
-  private answer: string[];
-  private hits: string[];
-  private misses: string[];
+  public readonly MAX_MISSES: number = 6;
+  private answer: string[] = [];
+  private hits: string[] = [];
+  private misses: string[] = [];
 
   constructor() { }
 
@@ -23,11 +23,11 @@ export class GameService {
     return this.getCurrentProgress();
   }
 
-  public getHits():string[]{
+  public getHits(): string[] {
     return this.hits;
   }
 
-  public getMisses():string[]{
+  public getMisses(): string[] {
     return this.misses;
   }
 
@@ -38,7 +38,9 @@ export class GameService {
   public preFill() {
     while (this.hits.length < this.answer.length * 0.25) {
       let letter: string = this.getRandomLetter();
-      this.applyGuess(letter);
+      if (letter.match('[A-Z]{1}')) {
+        this.applyGuess(letter);
+      }
     }
   }
 
@@ -47,7 +49,6 @@ export class GameService {
   }
 
   public applyGuess(guess: string): boolean {
-
     const isHit = this.isHit(guess);
 
     if (isHit) {
@@ -90,8 +91,16 @@ export class GameService {
     }
   }
 
+  public isGameOver(): boolean {
+    return (this.isWon() || this.isLose());
+  }
+
   public isWon(): boolean {
     return !(this.getCurrentProgress().indexOf('-') > -1);
+  }
+
+  public isLose(): boolean {
+    return (this.getRemainingTries() === 0);
   }
 
   private selectMovie(movies: IMovie[]): string {

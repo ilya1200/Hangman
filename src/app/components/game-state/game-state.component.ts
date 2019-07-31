@@ -8,8 +8,8 @@ import { GameState } from 'src/app/data-structs/game-state.enum';
 })
 export class GameStateComponent implements OnChanges {
   @Input() gameState: GameState;
-  @Output() againClicked:EventEmitter<boolean> =
-  new EventEmitter<boolean>();
+  @Output() againClicked: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   gameStateMessage: string;
   gameStateIcon: string;
   isPlaying: boolean;
@@ -27,7 +27,7 @@ export class GameStateComponent implements OnChanges {
   }
 
   getGameStateIcon(gameState: GameState): string {
-    let gameStateIcon = "";
+    let gameStateIcon: string = "";
     switch (gameState) {
       default:
       case GameState.playing:

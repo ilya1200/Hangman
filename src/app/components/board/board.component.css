@@ -11,3 +11,12 @@
      margin: 10px;
      min-width: 30px;
  }
+
+ .display,
+ .keyboard{
+     padding: 3px;
+ }
+
+ .display{
+     margin-bottom: 5px;
+ }

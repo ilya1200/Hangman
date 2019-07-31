@@ -10,8 +10,8 @@
     height: 46px;
     text-align: center;
     font-size: 30px;
+    box-shadow: 0 0 7px rgba(0,0,0,0.3);
 }
-
 
 .keyboard-letter[disabled]{
     cursor: not-allowed;
