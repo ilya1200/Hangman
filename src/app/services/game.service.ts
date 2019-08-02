@@ -7,14 +7,20 @@ import { strictEqual } from 'assert';
 })
 export class GameService {
   public readonly MAX_MISSES: number = 6;
-  private answer: string[] = [];
+  private letterAnswer: string[] = [];
+  private wordsAnswer: string[] = [];
   private hits: string[] = [];
   private misses: string[] = [];
+  private selectedMovie: string;
 
   constructor() { }
 
-  public createGame(movies: IMovie[]): string[] {
-    this.answer = this.selectMovie(movies).split("\\s{2,}").join(' ').split("");
+  public createGame(movies: IMovie[]): string[][] {
+    this.selectedMovie = this.selectMovie(movies);
+
+    this.letterAnswer = this.selectedMovie.split("");
+    this.wordsAnswer = this.selectedMovie.split(" ");
+
     this.hits = [];
     this.misses = [];
 
@@ -32,11 +38,11 @@ export class GameService {
   }
 
   public getAnswer(): string {
-    return this.answer.join('');
+    return this.letterAnswer.join('');
   }
 
   public preFill() {
-    while (this.hits.length < this.answer.length * 0.25) {
+    while (this.hits.length < this.letterAnswer.length * 0.25) {
       let letter: string = this.getRandomLetter();
       if (letter.match('[A-Z]{1}')) {
         this.applyGuess(letter);
@@ -45,7 +51,7 @@ export class GameService {
   }
 
   private getRandomLetter(): string {
-    return this.answer[this.generateRandomNumber(0, this.answer.length - 1)];
+    return this.letterAnswer[this.generateRandomNumber(0, this.letterAnswer.length - 1)];
   }
 
   public applyGuess(guess: string): boolean {
@@ -59,20 +65,26 @@ export class GameService {
     return isHit;
   }
 
-  public getCurrentProgress(): string[] {
-    const answer = this.answer;
-    let progress: string[] = [];
+  public getCurrentProgress(): string[][] {
+    const answer: string[] = this.wordsAnswer;
+    let progress: string[][] = [];
 
     for (let i = 0; i < answer.length; i++) {
-      let char: string = answer[i];
-      let display: string;
+      const word: string[] = answer[i].split("");
+      let wordProgress: string[] = [];
 
-      display = '-';
-      if (this.hits.indexOf(char) > -1 || char === ' ') {
-        display = char;
+      for (let j = 0; j < word.length; j++) {
+        const char: string = word[j];
+        let display: string = '-';
+
+        if (this.hits.indexOf(char) > -1) {
+          display = char;
+        }
+        wordProgress.push(display);
       }
-      progress.push(display);
+      progress.push(wordProgress);
     }
+
     return progress;
   }
 
@@ -80,7 +92,7 @@ export class GameService {
     return this.MAX_MISSES - this.misses.length;
   }
   public isHit(letter: string): boolean {
-    return (this.answer.indexOf(letter) > -1);
+    return (this.letterAnswer.indexOf(letter) > -1);
   }
 
   public isAlreadyBeenGuessed(letter: string): boolean {
@@ -96,7 +108,17 @@ export class GameService {
   }
 
   public isWon(): boolean {
-    return !(this.getCurrentProgress().indexOf('-') > -1);
+    let isWon: boolean = true;
+    const progress: string[][] = this.getCurrentProgress();
+
+    for (let i = 0; i < progress.length; i++) {
+      const word: string[] = progress[i];
+
+      if (word.indexOf('-') > -1) {
+        return false;
+      }
+    }
+    return isWon;
   }
 
   public isLose(): boolean {

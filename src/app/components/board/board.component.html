@@ -1,12 +1,14 @@
 <div class="board">
-  <div class="flex display">
+  <div class="display">
     <!--progress-->
-    <app-display-letter *ngFor="let dLetter of progress" [displayLetter]="dLetter" class="dletter"></app-display-letter>
+    <div *ngFor="let word of progress" class="word">
+      <app-display-letter *ngFor="let dLetter of word" [displayLetter]="dLetter" class="dletter"></app-display-letter>
+    </div>
   </div>
 
   <div class="keyboard">
     <!--keyboard-->
-    <app-keyboard-letter *ngFor="let kLetter of letters" [keyboardLetter]="kLetter"
+    <app-keyboard-letter class="kletter" *ngFor="let kLetter of letters" [keyboardLetter]="kLetter"
       [isDisabled]="game.isGameOver() || game.isAlreadyBeenGuessed(kLetter)" (onLetterClicked)="letterClicked($event)">
     </app-keyboard-letter>
   </div>

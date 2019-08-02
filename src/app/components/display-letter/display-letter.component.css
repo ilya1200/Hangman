@@ -1,8 +1,14 @@
+.letter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 40px;
+}
+
 .display-letter {
     background-color: transparent;
     color: black;
-    margin-right: 9px;
-    margin-bottom: -15px;
     font-weight: bold;
     font-size: 30px;
 }

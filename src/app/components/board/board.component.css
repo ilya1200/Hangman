@@ -1,22 +1,40 @@
-.board{
+.board,
+.display,
+.word{
     display: flex;
-    flex-direction: column;
 }
- .flex {
-     display: flex;
-     flex-wrap: wrap;
- }
 
- .dletter {
-     margin: 10px;
-     min-width: 30px;
- }
+.board{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
- .display,
- .keyboard{
-     padding: 3px;
- }
+.keyboard{
+    padding: 5px;
+    width: 540px;
+}
 
- .display{
-     margin-bottom: 5px;
- }
+.display{
+    margin-bottom: 5px;
+    padding: 3px;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 580px;
+    flex-wrap: wrap;
+}
+
+
+.dletter {
+    margin: 10px;
+}
+
+.kletter{
+    cursor: pointer;
+}
+
+.word{
+    flex-direction: row;
+    margin-right: 20px;
+    flex-basis: 30%;
+}

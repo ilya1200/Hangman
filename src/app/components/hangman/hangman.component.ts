@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { HttpService } from 'src/app/services/http.service';
-import { IMovie } from 'src/app/data-structs/imovie';
-import { errorHandler } from '@angular/platform-browser/src/browser';
 import { GameState } from 'src/app/data-structs/game-state.enum';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
@@ -13,7 +11,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 })
 export class HangmanComponent implements OnInit {
   @ViewChild('answerAlert') private answerAlert: SwalComponent;
-  progress: string[];
+  progress: string[][];
   isHit: boolean;
   hangmanStatus: number;
   gameState: GameState;

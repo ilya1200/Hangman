@@ -3,6 +3,11 @@
     justify-content: space-between;
 }
 
+.hangman > *{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .app-board {
     flex: 1;
 }
