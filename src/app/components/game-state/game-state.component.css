@@ -1,4 +1,4 @@
-.game-state{
+/* .game-state{
     width: 150px;
     height: 410px;
 }
@@ -35,4 +35,72 @@
     border: 0;
     border-radius: 16px;
     margin-top: 22px;
+} */
+
+/*------------------*/
+
+
+.win{
+    color: lightgreen;
+}
+
+.lose{
+    color: tomato;
+}
+
+.game-state{
+    width: 100%;
+    height: 100%;
+}
+
+.layout{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-state-message,
+.game-state-button{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+.game-state-icon,
+.game-state-message,
+.game-state-button{
+    flex: 1 50%;
+}
+
+.game-state-button{
+    background-color: #2271BF;
+    color: white;
+    height: 75px;
+    border: 0;
+    border-radius: 16px;
+    margin-top: 22px;
+} 
+
+/*------------------------------*/
+@media(min-width:850px){
+    .game-state{
+        width: 150px;
+        height: 410px;
+    }
+    
+    .layout{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    .game-state-icon,
+    .game-state-message,
+    .game-state-button{
+        flex: 0 auto;
+    }
 }

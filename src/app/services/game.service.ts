@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IMovie } from '../data-structs/imovie';
 import { strictEqual } from 'assert';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class GameService {
   private letterAnswer: string[] = [];
   private wordsAnswer: string[] = [];
   private hits: string[] = [];
+  private prefilled: string[] = [];
   private misses: string[] = [];
   private selectedMovie: string;
 
@@ -48,6 +50,10 @@ export class GameService {
         this.applyGuess(letter);
       }
     }
+
+    this.hits.forEach(letter=>{
+      this.prefilled.push(letter);
+    })
   }
 
   private getRandomLetter(): string {
@@ -101,6 +107,10 @@ export class GameService {
     } else {
       return false;
     }
+  }
+
+  public isPrefilled(letter:string):boolean{
+    return (this.prefilled.indexOf(letter)>-1);
   }
 
   public isGameOver(): boolean {

@@ -54,7 +54,7 @@ export class GameStateComponent implements OnChanges {
         gameStateMessage = "";
         break;
       case GameState.win:
-        gameStateMessage = "Yes you did is!";
+        gameStateMessage = "Yes you did it!";
         break;
       case GameState.lose:
         gameStateMessage = "Shit! You died :("

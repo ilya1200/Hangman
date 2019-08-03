@@ -5,6 +5,8 @@
     </span>
   </div>
   <div *ngIf="displayLetter!=' '">
-    <img src="assets/hangman/hangman-specs/assets/Rectangle.png">
+    <img [src]="game.isPrefilled(displayLetter)? prefilled : toBeFilled ">
+
+    
   </div>
 </div>
