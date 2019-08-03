@@ -7,6 +7,8 @@ import { GameState } from 'src/app/data-structs/game-state.enum';
   styleUrls: ['./game-state.component.css']
 })
 export class GameStateComponent implements OnChanges {
+  GameState=GameState;
+  
   @Input() gameState: GameState;
   @Output() againClicked: EventEmitter<boolean> =
     new EventEmitter<boolean>();

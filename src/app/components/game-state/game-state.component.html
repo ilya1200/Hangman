@@ -1,7 +1,9 @@
 <div class="game-state layout">
   <img class="game-state-icon" *ngIf="gameStateIcon" [src]="gameStateIcon">
-  <div class="game-state-message lose">
+  <div class="game-state-message"  [ngClass]="gameState === GameState.win ? 'win' : 'lose'" >
     {{gameStateMessage}}
   </div>
   <button *ngIf="!isPlaying" class="game-state-button" (click)="onClick()">AGAIN</button>
 </div>
+
+

@@ -1,13 +1,11 @@
 .app{
-    max-width: 1000px;
     display: flex;
     flex-direction: column;
 }
 
-
 .main-header{
-    max-height: 73px;
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 30px;
+    width: 100%;
 }
 
