@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    width: 40px;
+    margin: auto 10px;
 }
 
 .display-letter {

@@ -8,28 +8,18 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: baseline;
 }
 
-
-.game-state{
-    flex: 1 40%;
+.board{
+    margin: 20px auto;
 }
 
+.game-state,
 .hangman-status,
 .board{
-    flex-basis: 35%;
+    flex: 1 50%;
 }
-
-.hangman-status{
-    margin-left: auto;
-}
-
-.board{
-    flex-grow: 3;
-    order: 1;
-}
-
 
 @media(min-width:850px){
     .hangman{
